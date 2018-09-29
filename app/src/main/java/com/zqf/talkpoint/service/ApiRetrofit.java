@@ -83,15 +83,30 @@ public class ApiRetrofit {
     };
 
     /**
-     * 增加头部信息的拦截器
+     * 梨视频-->增加头部信息的拦截器
+     * X-Channel-Code:official
+     * X-Client-Agent:Xiaomi
+     * X-Client-Hash:2f3d6ffkda95dlz2fhju8d3s6dfges3t
+     * X-Client-ID:123456789123456
+     * X-Client-Version:2.3.2
+     * X-Long-Token:
+     * X-Platform-Type:0
+     * X-Platform-Version:5.0
+     * X-Serial-Num:1492140134
+     * X-User-ID:
      */
     private Interceptor mHeaderInterceptor = chain -> {
         Request.Builder builder = chain.request().newBuilder();
-        builder.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.108 Safari/537.36 2345Explorer/8.0.0.13547");
-        builder.addHeader("Cache-Control", "max-age=0");
-        builder.addHeader("Upgrade-Insecure-Requests", "1");
-        builder.addHeader("X-Requested-With", "XMLHttpRequest");
-        builder.addHeader("Cookie", "uuid=\"w:f2e0e469165542f8a3960f67cb354026\"; __tasessionId=4p6q77g6q1479458262778; csrftoken=7de2dd812d513441f85cf8272f015ce5; tt_webid=36385357187");
+        builder.addHeader("X-Channel-Code", "official");
+        builder.addHeader("X-Client-Agent", "Xiaomi");
+        builder.addHeader("X-Client-Hash", "2f3d6ffkda95dlz2fhju8d3s6dfges3t");
+        builder.addHeader("X-Client-ID", "123456789123456");
+        builder.addHeader("X-Client-Version", "2.3.2");
+        builder.addHeader("X-Long-Token", "");
+        builder.addHeader("X-Platform-Type", "0");
+        builder.addHeader("X-Platform-Version", "5.0");
+        builder.addHeader("X-Serial-Num", "1538206356378");
+        builder.addHeader("X-User-ID", "");
         return chain.proceed(builder.build());
     };
 
@@ -102,8 +117,8 @@ public class ApiRetrofit {
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
         Cache cache = new Cache(httpCacheDirectory, cacheSize);
 
-        //        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT);
-        //        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//请求/响应行 + 头 + 体
+        //HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT);
+        //loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//请求/响应行 + 头 + 体
 
         mClient = new OkHttpClient.Builder()
                 .addInterceptor(mHeaderInterceptor)//添加头部信息拦截器

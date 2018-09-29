@@ -9,7 +9,6 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         //alibaba_ARouter路由框架
@@ -22,12 +21,12 @@ android {
     buildTypes {
         debug {
             buildConfigField("boolean", "API_ENV", "true")
-            buildConfigField("String", "Host_URL", "\"https://www.apiopen.top/\"")
+            buildConfigField("String", "Host_URL", "\"http://app.pearvideo.com/clt/jsp/v2/\"")
             minifyEnabled false
         }
         release {
             buildConfigField("boolean", "API_ENV", "false")
-            buildConfigField("String", "Host_URL", "\"https://www.apiopen.top/\"")
+            buildConfigField("String", "Host_URL", "\"http://app.pearvideo.com/clt/jsp/v2/\"")
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -58,12 +57,12 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation "com.android.support:support-vector-drawable:$rootProject.ext.support_lib_vsion"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation "$rootProject.ext.junit"
+    implementation appcompat_v7
+    implementation appcompat_v4
+    implementation appcompat_design
+    implementation vector_drawable
+    implementation constraint_layout
+    testImplementation junit
     androidTestImplementation "$rootProject.ext.runner"
     androidTestImplementation "$rootProject.ext.espresso_core"
     implementation "$rootProject.ext.butterknife"

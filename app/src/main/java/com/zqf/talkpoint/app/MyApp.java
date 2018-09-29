@@ -10,9 +10,7 @@ import com.blankj.utilcode.util.CrashUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
-import com.orhanobut.logger.PrettyFormatStrategy;
 import com.zqf.talkpoint.BuildConfig;
 
 /**
@@ -30,7 +28,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        MultiDex.install(this);
+        initLogger();
 
         Utils.init(this);
         spUtils = SPUtils.getInstance("sp_talk_point");
@@ -47,28 +45,14 @@ public class MyApp extends Application {
         }
         //尽可能早，推荐在Application中初始化
         ARouter.init(this);
-        initLogger();
+
     }
 
     private void initLogger() {
-        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(true)  //（可选）是否显示线程信息。 默认值为true
-                .methodCount(2)         // （可选）要显示的方法行数。 默认2
-                .methodOffset(7)        // （可选）隐藏内部方法调用到偏移量。 默认5
-                .tag("TalkPoint")           //（可选）每个日志的全局标记。 默认PRETTY_LOGGER
-                .build();
         if (BuildConfig.API_ENV) {
-            //日志输出
-            Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
-        } else {
-            //上线时停止
-            Logger.addLogAdapter(new AndroidLogAdapter() {
-                @Override
-                public boolean isLoggable(int priority, String tag) {
-                    return BuildConfig.DEBUG;
-                }
-            });
+            //默认日志输出方式
         }
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static Context getContext() {
