@@ -1,0 +1,81 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // greenDao_add plugin
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//第三方框架配置文件版本
+ext {
+
+    // Sdk and tools
+    minSdkVersion = 16
+    targetSdkVersion = 27
+    compileSdkVersion = 27
+
+    //系统must need
+    support_lib_vsion = '27.1.1'
+    junit = 'junit:junit:4.12'
+    runner = 'com.android.support.test:runner:1.0.2'
+    espresso_core = 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //注解
+    butterknife = 'com.jakewharton:butterknife:8.8.1'
+    butterknife_compiler = 'com.jakewharton:butterknife-compiler:8.8.1'
+    //工具库
+    utilcode = 'com.blankj:utilcode:1.10.0'
+    //OkHttp+Retrofit+rxJava+G_son
+    okhttp = 'com.squareup.okhttp3:okhttp:3.11.0'
+    retrofit = 'com.squareup.retrofit2:retrofit:2.4.0'
+    retrofit_gson = 'com.squareup.retrofit2:converter-gson:2.4.0'
+    retrofit_scalars = 'com.squareup.retrofit2:converter-scalars:2.4.0'
+    retrofit_rxjava = 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+    //沉浸式
+    immersionbar = 'com.gyf.immersionbar:immersionbar:2.3.2-beta01'
+    //请求拦截器
+    logging_interceptor = 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //日志框架logger
+    orhanobut_logger = 'com.orhanobut:logger:2.1.1'
+    //64k方法数限制分包
+    multidex = 'com.android.support:multidex:1.0.3'
+    //图片处理
+    glide = 'com.github.bumptech.glide:glide:4.6.1'
+    glide_compiler = 'com.github.bumptech.glide:compiler:4.6.1'
+    //持久化数据库
+    greendao = 'org.greenrobot:greendao:3.2.2'
+    //alibaba ARouter框架
+    arouter = 'com.alibaba:arouter-api:1.4.0'
+    arouter_annotationProcessor = 'com.alibaba:arouter-compiler:1.2.1'
+    // 复杂Adapter
+    drakeet_multitype = 'me.drakeet.multitype:multitype:3.4.4'
+    //GreenDao数据库帮助类
+    GreenDaoUpgradeHelper = 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.1.0'
+    //xrecycleview
+    xrecyclerview = 'com.jcodecraeer:xrecyclerview:1.5.9'
+
+
+}

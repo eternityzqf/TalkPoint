@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.zqf.talkpoint"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        //alibaba_ARouter路由框架
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            buildConfigField("boolean", "API_ENV", "true")
+            buildConfigField("String", "Host_URL", "\"https://www.apiopen.top/\"")
+            minifyEnabled false
+        }
+        release {
+            buildConfigField("boolean", "API_ENV", "false")
+            buildConfigField("String", "Host_URL", "\"https://www.apiopen.top/\"")
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //支持java8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+
+    greendao {
+        schemaVersion 1
+        //DaoSession、DaoMaster以及所有实体类的dao生成的目录,默认为你的entity所在的包名
+        //daoPackage 包名
+        daoPackage 'com.zqf.talkpoint.db'
+        //这就是我们上面说到的自定义生成数据库文件的目录了，
+        //可以将生成的文件放到我们的java目录中，而不是build中，这样就不用额外的设置资源目录了
+        //工程路径
+        targetGenDir 'src/main/java'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation "com.android.support:support-vector-drawable:$rootProject.ext.support_lib_vsion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation "$rootProject.ext.junit"
+    androidTestImplementation "$rootProject.ext.runner"
+    androidTestImplementation "$rootProject.ext.espresso_core"
+    implementation "$rootProject.ext.butterknife"
+    annotationProcessor "$rootProject.ext.butterknife_compiler"
+    implementation "$rootProject.ext.utilcode"
+    implementation "$rootProject.ext.okhttp"
+    implementation "$rootProject.ext.retrofit"
+    implementation "$rootProject.ext.retrofit_gson"
+    implementation "$rootProject.ext.retrofit_scalars"
+    implementation "$rootProject.ext.retrofit_rxjava"
+    implementation "$rootProject.ext.immersionbar"
+    implementation "$rootProject.ext.logging_interceptor"
+    implementation "$rootProject.ext.multidex"
+    implementation "$rootProject.ext.glide"
+    annotationProcessor "$rootProject.ext.glide_compiler"
+    implementation "$rootProject.ext.greendao"
+    implementation "$rootProject.ext.orhanobut_logger"
+    implementation "$rootProject.ext.arouter"
+    annotationProcessor "$rootProject.ext.arouter_annotationProcessor"
+    implementation "$rootProject.ext.drakeet_multitype"
+    implementation "$rootProject.ext.GreenDaoUpgradeHelper"
+    implementation "$rootProject.ext.xrecyclerview"
+}
