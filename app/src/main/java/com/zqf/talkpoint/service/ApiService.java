@@ -1,8 +1,9 @@
 package com.zqf.talkpoint.service;
 
 import com.zqf.talkpoint.model.CategoryBean;
-import com.zqf.talkpoint.model.User;
+import com.zqf.talkpoint.model.UserBean;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,10 +20,10 @@ public interface ApiService {
      * 注册用户
      *
      * @param user 注册的实体类
-     * @return User
+     * @return UserBean
      */
     @POST("users/regist")
-    Call<User> createUser(@Body User user);
+    Call<UserBean> createUser(@Body UserBean user);
 
     /**
      * 获取标签
@@ -30,6 +31,6 @@ public interface ApiService {
      * @return 标签Bean
      */
     @GET("getCategorys.jsp")
-    Call<CategoryBean> getCategorys();
+    Observable<CategoryBean> getCategorys();
 
 }

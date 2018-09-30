@@ -85,4 +85,7 @@ dependencies {
     implementation "$rootProject.ext.drakeet_multitype"
     implementation "$rootProject.ext.GreenDaoUpgradeHelper"
     implementation "$rootProject.ext.xrecyclerview"
+    implementation "$rootProject.ext.reactivex"
+    implementation "$rootProject.ext.rxandroid"
+    implementation "$rootProject.ext.hipermission"
 }

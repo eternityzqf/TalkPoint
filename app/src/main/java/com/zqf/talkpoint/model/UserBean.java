@@ -5,5 +5,5 @@ package com.zqf.talkpoint.model;
  * Time：2018/9/29 11:49
  * desc：
  */
-public class User {
+public class UserBean {
 }

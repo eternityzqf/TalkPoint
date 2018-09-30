@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
@@ -73,12 +73,11 @@ public class ApiRetrofit {
         long duration = endTime - startTime;
         okhttp3.MediaType mediaType = response.body().contentType();
         String content = response.body().string();
-        Logger.e("----------Request Start----------------");
-        Logger.e("| " + request.toString());
-        Logger.e("| Response:" + content);
-        Logger.e("----------Request End:" + duration + "毫秒----------");
-        return response.newBuilder()
-                .body(okhttp3.ResponseBody.create(mediaType, content))
+        Logger.d("----Request Start----");
+        Logger.d(request.toString());
+        Logger.w(duration + "毫秒" + " Response:\n" + content);
+        Logger.d("----Request End----");
+        return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content))
                 .build();
     };
 
@@ -93,7 +92,7 @@ public class ApiRetrofit {
      * X-Platform-Type:0
      * X-Platform-Version:5.0
      * X-Serial-Num:1492140134
-     * X-User-ID:
+     * X-UserBean-ID:
      */
     private Interceptor mHeaderInterceptor = chain -> {
         Request.Builder builder = chain.request().newBuilder();
@@ -106,7 +105,7 @@ public class ApiRetrofit {
         builder.addHeader("X-Platform-Type", "0");
         builder.addHeader("X-Platform-Version", "5.0");
         builder.addHeader("X-Serial-Num", "1538206356378");
-        builder.addHeader("X-User-ID", "");
+        builder.addHeader("X-UserBean-ID", "");
         return chain.proceed(builder.build());
     };
 
@@ -132,7 +131,7 @@ public class ApiRetrofit {
                 .baseUrl(BuildConfig.Host_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//支持RxJava
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//支持RxJava
                 .client(mClient)
                 .build();
 

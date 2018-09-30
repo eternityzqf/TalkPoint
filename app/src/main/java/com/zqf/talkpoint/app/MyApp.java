@@ -3,14 +3,15 @@ package com.zqf.talkpoint.app;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.CrashUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.zqf.talkpoint.BuildConfig;
 
 /**
@@ -27,12 +28,13 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        initLogger();
-
+        context = getApplicationContext();
         Utils.init(this);
         spUtils = SPUtils.getInstance("sp_talk_point");
         CrashUtils.init();
+
+        initLogger();
+
         /**
          * buildConfigField的boolean值来判断是否开启
          * 这两行必须写在init之前，否则这些配置在init过程中将无效
@@ -45,14 +47,19 @@ public class MyApp extends Application {
         }
         //尽可能早，推荐在Application中初始化
         ARouter.init(this);
-
     }
 
     private void initLogger() {
+        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false) //（可选）是否显示线程信息。默认值true
+                .methodCount(2)  //（可选）要显示的方法行数。默认值2
+                .methodOffset(7) //（可选）隐藏内部方法调用到偏移量。默认值5
+                .tag("Talk")   //（可选）每个日志的全局标记。默认PRETTY_LOGGER
+                .build();
         if (BuildConfig.API_ENV) {
             //默认日志输出方式
+            Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
         }
-        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static Context getContext() {

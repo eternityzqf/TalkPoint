@@ -98,5 +98,25 @@ public class CategoryBean {
         public void setColor(String color) {
             this.color = color;
         }
+
+        @Override
+        public String toString() {
+            return "CategoryListBean{" +
+                    "categoryId='" + categoryId + '\'' +
+                    ", name='" + name + '\'' +
+                    ", color='" + color + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryBean{" +
+                "resultCode='" + resultCode + '\'' +
+                ", resultMsg='" + resultMsg + '\'' +
+                ", reqId='" + reqId + '\'' +
+                ", systemTime='" + systemTime + '\'' +
+                ", categoryList=" + categoryList +
+                '}';
     }
 }
