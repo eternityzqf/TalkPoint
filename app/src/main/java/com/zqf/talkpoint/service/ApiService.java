@@ -1,6 +1,7 @@
 package com.zqf.talkpoint.service;
 
 import com.zqf.talkpoint.model.CategoryBean;
+import com.zqf.talkpoint.model.DetailBean;
 import com.zqf.talkpoint.model.UserBean;
 
 import io.reactivex.Observable;
@@ -8,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Author：zqf
@@ -32,5 +34,13 @@ public interface ApiService {
      */
     @GET("getCategorys.jsp")
     Observable<CategoryBean> getCategorys();
+
+    /**
+     * 获取详情
+     *
+     * @param lastLikeIds 参数对应标签ID
+     */
+    @GET("home.jsp")
+    Observable<DetailBean> getDetail(@Query("lastLikeIds") String lastLikeIds);
 
 }
