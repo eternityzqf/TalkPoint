@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "conf.gradle"
 
 buildscript {
 
@@ -36,6 +37,10 @@ ext {
     minSdkVersion = 16
     targetSdkVersion = 27
     compileSdkVersion = 27
+
+    //mvp
+    versionCode = 1
+    versionName = '1.0.0'
 
     //系统must need
     support_lib_vsion = '27.1.1'
@@ -85,4 +90,7 @@ ext {
     reactivex = 'io.reactivex.rxjava2:rxjava:2.1.5'
     rxandroid = 'io.reactivex.rxjava2:rxandroid:2.0.1'
     hipermission = 'me.weyye.hipermission:library:1.0.7'
+
+    //网络加载中
+    avi_loading = "com.wang.avi:library:1.0.2"
 }
